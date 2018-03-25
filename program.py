@@ -12,9 +12,8 @@ bot = commands.Bot(command_prefix='?', description='A simple tutbot')
 
 @bot.event
 async def on_ready():
-    print('logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
+    print('{0}:{1} starting...'.format(bot.user.name, bot.user.id))
+    print('Ready to serve, my Lord.')
     print('--------------')
 
 
