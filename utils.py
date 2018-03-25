@@ -12,3 +12,4 @@ def datetime_helper(time):
     local_tz = pytz.timezone('Australia/Perth')
     local_time = datetime_object.replace(tzinfo=pytz.utc).astimezone(local_tz)
     return local_time
+
