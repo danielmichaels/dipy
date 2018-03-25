@@ -1,14 +1,13 @@
+from token import WEATHER_TOKEN
 from utils import datetime_helper
 from pprint import pprint
 import requests
-from token import WEATHER_TOKEN
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 
 class Weather:
-
 
     def __init__(self, city='perth', country='AU'):
         self.city = city
