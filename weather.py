@@ -1,4 +1,4 @@
-from token import WEATHER_TOKEN
+from api_secrets import WEATHER_TOKEN
 from utils import datetime_helper
 from pprint import pprint
 import requests
@@ -43,7 +43,6 @@ class Weather:
         As At:\t **{3}**
         """.format(location, temp, conditions, local_time, cc)
         return output
-
 
 # weather = Weather()
 # data = weather.get_data()

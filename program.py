@@ -1,4 +1,4 @@
-from token import BOT_TOKEN
+from api_secrets import BOT_TOKEN
 from datetime import datetime
 from discord.ext import commands
 from weather import Weather
@@ -6,8 +6,6 @@ import logging
 import requests
 
 logging.basicConfig(level=logging.INFO)
-
-
 
 bot = commands.Bot(command_prefix='?', description='A simple tutbot')
 
