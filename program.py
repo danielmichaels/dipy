@@ -38,7 +38,7 @@ async def btc():
     btc_now = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
     js = requests.get(btc_now).json()
     usd_price = js['bpi']['USD']['rate']
-    await bot.say('BTC rate in USD now: {usd_price}'.format(usd_price))
+    await bot.say('BTC rate in USD now: {}'.format(usd_price))
 
 
 @bot.command(
