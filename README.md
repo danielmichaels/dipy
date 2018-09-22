@@ -1,3 +1,6 @@
+# Broken after new update. 
+# Maintained for archive purposes only
+
 ## Dipy
 
 A simple toy discord bot that doesn't do much.
