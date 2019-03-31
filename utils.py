@@ -12,7 +12,7 @@ def datetime_helper(time):
     new = datetime.datetime.fromtimestamp(time).strftime('%H:%M %d/%m/%Y')
     datetime_object = datetime.datetime.strptime(new, '%H:%M %d/%m/%Y')
 
-    local_tz = pytz.timezone('Australia/Perth')
+    local_tz = pytz.timezone('Australia/Sydney')
     local_time = datetime_object.replace(tzinfo=pytz.utc).astimezone(local_tz)
     return local_time
 
@@ -28,3 +28,4 @@ def external_ip():
         return resp.text
     except requests.ConnectionError as e:
         print(e)
+
