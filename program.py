@@ -10,7 +10,7 @@ from weather import Weather
 
 logging.basicConfig(level=logging.INFO)
 
-bot = commands.Bot(command_prefix='?', description='A simple tutbot')
+bot = commands.Bot(command_prefix='?', description='A simple bot')
 bot.remove_command('help')
 
 
@@ -22,6 +22,33 @@ async def on_ready():
 
 
 @bot.command()
+async def help(ctx):
+    author = ctx.message.author
+    embed = discord.Embed(title="My Helper Bot",
+                          description="A useful helper - list of available commands: ",
+                          color=discord.Color.dark_gold())
+                          # color=0xeee657)
+    embed.set_author(name="Help")
+    embed.add_field(name="?hello", value="echo replies 'world'", inline=False)
+    embed.add_field(name="?add",
+                    value="Gives the sum of two integers **A** and **B**",
+                    inline=False)
+    embed.add_field(name="?cat", value="Provide comic cat relief gif.",
+                    inline=False)
+    embed.add_field(name="?weather",
+                    value="Returns weather for user entered location"
+                          "\n**See `?help weather` for more information**",
+                    inline=False)
+    embed.add_field(name="?btc",
+                    value="Return current BTC price in USD from CoinDesk",
+                    inline=False)
+    embed.add_field(name="?time", value="return current server time.",
+                    inline=False)
+
+    await ctx.send(author, embed=embed)
+
+
+@bot.command(description="A simple hello world echo reply.")
 async def hello(ctx):
     await ctx.send('World!')
 
