@@ -1,5 +1,8 @@
 import datetime
+
 import pytz
+import requests
+from requests.adapters import HTTPAdapter
 
 
 def datetime_helper(time):
@@ -13,3 +16,15 @@ def datetime_helper(time):
     local_time = datetime_object.replace(tzinfo=pytz.utc).astimezone(local_tz)
     return local_time
 
+
+def external_ip():
+    """Returns Servers external IP address."""
+    retries = HTTPAdapter(max_retries=3)
+    session = requests.Session()
+    api = 'https://api.ipify.org'
+    session.mount(api, retries)
+    try:
+        resp = session.get(api)
+        return resp.text
+    except requests.ConnectionError as e:
+        print(e)
