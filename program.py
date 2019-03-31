@@ -27,7 +27,6 @@ async def help(ctx):
     embed = discord.Embed(title="My Helper Bot",
                           description="A useful helper - list of available commands: ",
                           color=discord.Color.dark_gold())
-                          # color=0xeee657)
     embed.set_author(name="Help")
     embed.add_field(name="?hello", value="echo replies 'world'", inline=False)
     embed.add_field(name="?add",
@@ -35,9 +34,12 @@ async def help(ctx):
                     inline=False)
     embed.add_field(name="?cat", value="Provide comic cat relief gif.",
                     inline=False)
-    embed.add_field(name="?weather",
+    embed.add_field(name="?weather [city] [country_code]",
                     value="Returns weather for user entered location"
-                          "\n**See `?help weather` for more information**",
+                          "\n**Requires {city} {country_code}**"
+                          "\nIf city is hyphenated or multi-word such as "
+                          "Alice Springs it must be underscored, see example."
+                          "\n`?weather alice_springs au`",
                     inline=False)
     embed.add_field(name="?btc",
                     value="Return current BTC price in USD from CoinDesk",
@@ -48,12 +50,12 @@ async def help(ctx):
     await ctx.send(author, embed=embed)
 
 
-@bot.command(description="A simple hello world echo reply.")
+@bot.command()
 async def hello(ctx):
     await ctx.send('World!')
 
 
-@bot.command(description="Given two integers return their sum.")
+@bot.command()
 async def add(ctx, int1: int, int2: int):
     await ctx.send(int1 + int2)
 
@@ -63,13 +65,13 @@ async def cat(ctx):
     await ctx.send("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
 
 
-@bot.command(description="Prints servers system time")
+@bot.command()
 async def time(ctx):
     now = datetime.ctime(datetime.now())
     await ctx.send(now)
 
 
-@bot.command(description="Prints out current CoinDesk USD value of BTC")
+@bot.command()
 async def btc(ctx):
     btc_now = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
     js = requests.get(btc_now).json()
@@ -77,9 +79,7 @@ async def btc(ctx):
     await ctx.send('BTC rate in USD now: {}'.format(usd_price))
 
 
-@bot.command(
-    description="Get weather from user entered location: requires {city} {country code}"
-                "\n\n If city is hyphenated please use underscores: alice_springs")
+@bot.command()
 async def weather(ctx, city='newcastle', cc='au'):
     city = city.replace("_", " ")
     query = Weather(city, cc)
