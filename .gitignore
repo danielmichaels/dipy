@@ -185,3 +185,4 @@ crashlytics-build.properties
 fabric.properties
 
 api_secrets.py
+cache.sqlite
