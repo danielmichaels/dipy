@@ -34,12 +34,12 @@ async def help(ctx):
                     inline=False)
     embed.add_field(name="?cat", value="Provide comic cat relief gif.",
                     inline=False)
-    embed.add_field(name="?weather [city] [country_code]",
+    embed.add_field(name="?weather **[city] [country_code]**",
                     value="Returns weather for user entered location"
-                          "\n**Requires {city} {country_code}**"
                           "\nIf city is hyphenated or multi-word such as "
                           "Alice Springs it must be underscored, see example."
-                          "\n`?weather alice_springs au`",
+                          "\n`?weather alice_springs au`"
+                          "Both [city] and [country_code] are required.",
                     inline=False)
     embed.add_field(name="?btc",
                     value="Return current BTC price in USD from CoinDesk",
@@ -82,10 +82,15 @@ async def btc(ctx):
 @bot.command()
 async def weather(ctx, city='newcastle', cc='au'):
     city = city.replace("_", " ")
-    query = Weather(city, cc)
-    data = query.get_data()
-    results = query.format(data)
-    await ctx.send(results)
+    key_error = "**Error**\n__Probable causes:__\n- Incorrect spelling\n" \
+                "- Country Code not entered\n- Multi-word city missing `_`"
+    try:
+        query = Weather(city, cc)
+        data = query.get_data()
+        results = query.format(data)
+        await ctx.send(results)
+    except KeyError:
+        await ctx.send(key_error)
 
 
 bot.run(BOT_TOKEN)
